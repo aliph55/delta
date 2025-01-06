@@ -4,12 +4,11 @@
     "slug": "delta",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash-icon.png",
+      "image": "./assets/spash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,20 +17,19 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/spash.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alisam.delta"
     },
     "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-router"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    "extra": {
+      "eas": {
+        "projectId": "a0074cd9-d221-40f0-a036-2dc9e1a81ee7"
+      }
+    },
+    "plugins": ["expo-font"]
   }
 }
