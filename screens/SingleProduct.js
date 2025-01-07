@@ -13,8 +13,6 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 const SingleProduct = ({ route, navigation }) => {
   const { item } = route.params;
 
-  console.log("item ", item);
-
   return (
     <View
       style={{
@@ -204,13 +202,16 @@ const SingleProduct = ({ route, navigation }) => {
               </Text>
             </View>
             <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Payment", {
+                  item,
+                })
+              }
               style={{
                 width: 50,
                 backgroundColor: "white",
                 alignSelf: "center",
                 borderRadius: 5,
-                // padding: 10,
-                // alignContent: "flex-end",
               }}
             >
               <Text

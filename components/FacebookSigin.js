@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import React from "react";
 
 const FacebookSigin = () => {
   return (
     <View>
-      <Text>FacebookSigin</Text>
+      <Image source={require("../assets/facebook.png")} />
     </View>
   );
 };
