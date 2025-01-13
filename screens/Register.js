@@ -1,20 +1,12 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import TitleImage from "../components/TitleImage";
 import Icon from "../components/Icon";
 import GoogleSigin from "../components/GoogleSigin";
-import FacebookSigin from "../components/FacebookSigin";
 
 const Register = () => {
-  const { width, height } = useWindowDimensions();
   return (
-    <View style={[styles.container, { width, height }]}>
+    <View style={[styles.container]}>
       <TitleImage />
       <Icon />
       <View style={styles.content}>
@@ -27,11 +19,16 @@ const Register = () => {
         >
           Please Login...
         </Text>
-        <View style={styles.login}>
+        <View
+          style={{
+            flexDirection: "row",
+            // gap: 35,
+            width: "100%",
+            alignContent: "space-between",
+            justifyContent: "space-around",
+          }}
+        >
           <GoogleSigin />
-        </View>
-        <View style={styles.login}>
-          <FacebookSigin />
         </View>
       </View>
     </View>
@@ -43,18 +40,22 @@ export default Register;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F5F5F5",
+    flex: 1,
   },
   content: {
-    gap: 45,
-    flex: 1,
     backgroundColor: "#e1e1e1",
-    padding: 25,
+    // gap: 5,
+    flex: 1,
+    // height: 450,
+    aspectRatio: "auto",
+    padding: 10,
     margin: 25,
-    paddingTop: 35,
+    paddingTop: 5,
     alignItems: "center",
+    justifyContent: "space-around",
     borderRadius: 25,
   },
   login: {
-    marginTop: 35,
+    // marginTop: 15,
   },
 });

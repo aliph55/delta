@@ -5,7 +5,7 @@ const TitleImage = () => {
   return (
     <View
       style={{
-        height: 300,
+        height: 200,
       }}
     >
       <Image
@@ -14,7 +14,7 @@ const TitleImage = () => {
           height: "100%",
         }}
         source={require("../assets/title.png")}
-        resizeMode="cover"
+        resizeMode="stretch"
       />
     </View>
   );

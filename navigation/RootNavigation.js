@@ -5,6 +5,7 @@ import Register from "../screens/Register";
 import Home from "../screens/Home";
 import Product from "../screens/Product";
 import SingleProduct from "../screens/SingleProduct";
+import Payment from "../screens/Payment";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,15 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="Product" component={Product} />
+        <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen
           name="SingleProduct"
           options={{
@@ -26,13 +35,6 @@ const RootNavigation = () => {
           }}
           name="Home"
           component={Home}
-        />
-        <Stack.Screen
-          name="Regiser"
-          component={Register}
-          options={{
-            headerShown: false,
-          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

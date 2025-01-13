@@ -1,8 +1,17 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const Categories = () => {
   const [categories, setCategories] = useState();
+  const navigation = useNavigation();
 
   const getData = async () => {
     try {
@@ -48,7 +57,12 @@ const Categories = () => {
           keyExtractor={(item) => item}
           renderItem={({ item }) => {
             return (
-              <View
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Product", {
+                    category: item,
+                  })
+                }
                 style={{
                   margin: 15,
                   borderRadius: 25,
@@ -67,7 +81,7 @@ const Categories = () => {
                 <Text style={{ textAlign: "center", fontSize: 16 }}>
                   {item}
                 </Text>
-              </View>
+              </TouchableOpacity>
             );
           }}
         />
