@@ -6,15 +6,25 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CardForm, StripeProvider } from "@stripe/stripe-react-native";
 import { STRIPE_PUBLISHABLE_KEY } from "../constant/App";
+import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const Payment = ({ route }) => {
-  const { item } = route.params;
-  const [isReady, setIsReady] = useState(false);
+  const { title, image, description, id, price, rating, category } =
+    route.params;
+  const navigation = useNavigation();
 
-  console.log("Payment ", item);
+  const [isReady, setIsReady] = useState(false);
+  const userInfo = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (userInfo.isLooged === false) {
+      navigation.navigate("Register");
+    }
+  }, []);
 
   const fetchPaymentIntentClientSecret = async () => {
     const response = await fetch(
@@ -25,9 +35,9 @@ const Payment = ({ route }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "ali.pour@gmail.com",
+          email: userInfo.userData.email,
           currency: "usd",
-          amount: item.price * 100,
+          amount: price * 100,
         }),
       }
     );
@@ -56,7 +66,7 @@ const Payment = ({ route }) => {
       <ScrollView contentContainerStyle={style.paymentContainer}>
         {/* <Header title={"Making Donation"} /> */}
         <Text style={style.donationAmountDescription}>
-          You are about to donate {item.price}
+          You are about to donate {price}
         </Text>
         <View>
           <StripeProvider publishableKey={STRIPE_PUBLISHABLE_KEY}>

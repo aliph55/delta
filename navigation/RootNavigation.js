@@ -14,7 +14,7 @@ const RootNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Regiser"
+          name="Register"
           component={Register}
           options={{
             headerShown: false,

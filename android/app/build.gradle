@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.ali_sam.delta'
+    namespace 'com.alisam.delta'
     defaultConfig {
-        applicationId 'com.ali_sam.delta'
+        applicationId 'com.alisam.delta'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

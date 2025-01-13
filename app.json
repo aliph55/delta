@@ -25,11 +25,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "plugins": ["@react-native-google-signin/google-signin"],
     "extra": {
       "eas": {
-        "projectId": "a0074cd9-d221-40f0-a036-2dc9e1a81ee7"
+        "projectId": "d65fd15c-e8d8-4f88-a56f-0f1711501012"
       }
-    },
-    "plugins": ["expo-font"]
+    }
   }
 }

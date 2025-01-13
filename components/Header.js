@@ -1,7 +1,10 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const userInfo = useSelector((state) => state.user);
+
   return (
     <View
       style={{
@@ -29,7 +32,9 @@ const Header = () => {
         }}
       >
         <Image
-          source={require("../assets/user.png")}
+          source={{
+            uri: userInfo?.userData?.photo,
+          }}
           style={{
             width: 50,
             height: 50,

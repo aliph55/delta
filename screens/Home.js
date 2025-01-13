@@ -16,12 +16,7 @@ const Home = () => {
   return (
     <View style={[styles.container, { width, height }]}>
       <ImageHeader />
-      <ScrollView
-        style={{
-          flex: 1,
-          // paddingBottom: 45,
-        }}
-      >
+      <ScrollView>
         <Header />
         <Search />
         <NewArrival />

@@ -1,16 +1,61 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   GoogleSignin,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { logIn } from "../redux/User";
 
 const GoogleSigin = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   GoogleSignin.configure({
     scopes: ["https://www.googleapis.com/auth/userinfo.profile"], // what API you want to access on behalf of the user, default is email and profile
     webClientId:
       "580447110631-vvv3d82c0e3sotaeacnkigi5cu2ks62a.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access). Required to get the `idToken` on the user object!
+    iosClientId:
+      "580447110631-e3ufpt1an763bo7v3j15lipj8lti9uft.apps.googleusercontent.com",
+    fflineAccess: true,
+    forceCodeForRefreshToken: true,
+    profileImageSize: 120,
   });
+
+  const getCurrentUserInfo = async () => {
+    try {
+      const userInfo = await GoogleSignin.signInSilently();
+      if (userInfo.type === "success") {
+        dispatch(logIn(userInfo.data.user));
+        navigation.navigate("Home");
+      }
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_REQUIRED) {
+        console.log("error", error);
+      } else {
+        console.log("error", error);
+      }
+    }
+  };
+
+  const getCurrentUser = async () => {
+    const currentUser = await GoogleSignin.getCurrentUser();
+
+    // console.log("currentUser ", currentUser);
+    if (currentUser.type === "success") {
+      dispatch(logIn(currentUser.user));
+      navigation.navigate("Home");
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUserInfo();
+  }, []);
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <TouchableOpacity
@@ -18,12 +63,12 @@ const GoogleSigin = () => {
         try {
           await GoogleSignin.hasPlayServices();
           const userInfo = await GoogleSignin.signIn();
-          console.log("first");
+          // console.log("first", userInfo);
           if (userInfo.type === "success") {
             // dispatch(logIn(userInfo));
             navigation.navigate("Home");
           }
-          console.log(userInfo);
+          // console.log(userInfo);
           // console.log(JSON.stringify(userInfo));
           // console.log(userInfo);
         } catch (error) {
@@ -32,7 +77,7 @@ const GoogleSigin = () => {
             // user cancelled the login flow
           } else if (error.code === statusCodes.IN_PROGRESS) {
             console.log(
-              " operation (e.g. sign in) is in progress already",
+              "operation (e.g. sign in) is in progress already",
               error
             );
             // operation (e.g. sign in) is in progress already

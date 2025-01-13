@@ -1,18 +1,10 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import TitleImage from "../components/TitleImage";
 import Icon from "../components/Icon";
 import GoogleSigin from "../components/GoogleSigin";
-import FacebookSigin from "../components/FacebookSigin";
 
 const Register = () => {
-  const { width, height } = useWindowDimensions();
   return (
     <View style={[styles.container]}>
       <TitleImage />
@@ -37,7 +29,6 @@ const Register = () => {
           }}
         >
           <GoogleSigin />
-          <FacebookSigin />
         </View>
       </View>
     </View>
