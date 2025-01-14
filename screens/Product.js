@@ -34,8 +34,6 @@ const Product = ({ navigation, route }) => {
     getProducts();
   }, []);
 
-  // console.log(newProducts);
-
   const turncateString = (str, num) => {
     if (str?.length > num) {
       return str.slice(0, num) + "...";
@@ -43,14 +41,6 @@ const Product = ({ navigation, route }) => {
       return str;
     }
   };
-
-  // title: item.title,
-  //                   image: item.image,
-  //                   description: item.description,
-  //                   id: item.id,
-  //                   price: item.price,
-  //                   rating: item.rating,
-  //                   category: item.category,
 
   return (
     <View>
@@ -62,7 +52,6 @@ const Product = ({ navigation, route }) => {
             alignItems: "center",
           }}
           renderItem={({ item }) => {
-            // console.log("Product ", item);
             return (
               <TouchableOpacity
                 onPress={() =>

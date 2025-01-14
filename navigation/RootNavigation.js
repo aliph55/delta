@@ -6,6 +6,7 @@ import Home from "../screens/Home";
 import Product from "../screens/Product";
 import SingleProduct from "../screens/SingleProduct";
 import Payment from "../screens/Payment";
+import Logout from "../screens/Logout";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,13 @@ const RootNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Home"
+          component={Home}
+        />
+        <Stack.Screen
           name="Register"
           component={Register}
           options={{
@@ -21,6 +29,7 @@ const RootNavigation = () => {
           }}
         />
         <Stack.Screen name="Product" component={Product} />
+        <Stack.Screen name="Logout" component={Logout} />
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen
           name="SingleProduct"
@@ -28,13 +37,6 @@ const RootNavigation = () => {
             headerShown: false,
           }}
           component={SingleProduct}
-        />
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Home"
-          component={Home}
         />
       </Stack.Navigator>
     </NavigationContainer>

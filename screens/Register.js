@@ -28,6 +28,7 @@ const Register = () => {
             justifyContent: "space-around",
           }}
         >
+          {}
           <GoogleSigin />
         </View>
       </View>

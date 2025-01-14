@@ -63,14 +63,9 @@ const GoogleSigin = () => {
         try {
           await GoogleSignin.hasPlayServices();
           const userInfo = await GoogleSignin.signIn();
-          // console.log("first", userInfo);
           if (userInfo.type === "success") {
-            // dispatch(logIn(userInfo));
             navigation.navigate("Home");
           }
-          // console.log(userInfo);
-          // console.log(JSON.stringify(userInfo));
-          // console.log(userInfo);
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             console.log("cancelled", error);

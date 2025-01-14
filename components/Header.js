@@ -1,9 +1,21 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = () => {
   const userInfo = useSelector((state) => state.user);
+  const navigation = useNavigation();
+
+  console.log("Header ", userInfo);
+
+  const direction = () => {
+    if (userInfo.isLooged === true) {
+      navigation.navigate("Logout");
+    } else {
+      navigation.navigate("Register");
+    }
+  };
 
   return (
     <View
@@ -31,16 +43,23 @@ const Header = () => {
           alignItems: "center",
         }}
       >
-        <Image
-          source={{
-            uri: userInfo?.userData?.photo,
-          }}
-          style={{
-            width: 50,
-            height: 50,
-            borderRadius: 25,
-          }}
-        />
+        <TouchableOpacity onPress={direction}>
+          <Image
+            source={{
+              uri:
+                userInfo.isLooged === false
+                  ? userInfo?.profileImage
+                  : userInfo?.userData?.photo,
+            }}
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 25,
+              backgroundColor: "red",
+            }}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -13,38 +13,39 @@ import Animated, {
 } from "react-native-reanimated";
 
 const SegmentedControl = React.memo(({ selectedOption, onOptionPress }) => {
-  const { width: windowWidth } = useWindowDimensions();
+  const { height: windowHeight } = useWindowDimensions();
 
   const options = ["S", "M", "L", "XL"];
 
   const internalPadding = 20;
-  const segmentedControlWidth = windowWidth - 40;
+  const segmentedControlHeight = windowHeight / 3;
 
-  const itemWidth = (segmentedControlWidth - internalPadding) / 4;
+  const itemHeight =
+    (segmentedControlHeight - internalPadding) / options.length;
 
   const rStyle = useAnimatedStyle(() => {
     return {
-      left: withTiming(
-        itemWidth * options.indexOf(selectedOption) + internalPadding / 2
+      top: withTiming(
+        itemHeight * options.indexOf(selectedOption) + internalPadding / 2
       ),
     };
-  }, [selectedOption, options, itemWidth]);
+  }, [selectedOption, options, itemHeight]);
 
   return (
     <View
       style={[
         styles.container,
         {
-          width: segmentedControlWidth,
+          height: segmentedControlHeight,
           borderRadius: 20,
-          paddingLeft: internalPadding / 2,
+          paddingTop: internalPadding / 2,
         },
       ]}
     >
       <Animated.View
         style={[
           {
-            width: itemWidth,
+            height: itemHeight,
           },
           rStyle,
           styles.activeBox,
@@ -59,7 +60,7 @@ const SegmentedControl = React.memo(({ selectedOption, onOptionPress }) => {
             key={option}
             style={[
               {
-                width: itemWidth,
+                height: itemHeight,
               },
               styles.labelContainer,
             ]}
@@ -74,8 +75,8 @@ const SegmentedControl = React.memo(({ selectedOption, onOptionPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    height: 55,
+    flexDirection: "column", // Dikey hizalama
+    width: 120, // Genişliği sabitlemek için ayarlandı
     backgroundColor: Palette.baseGray05,
     marginBottom: 25,
   },
@@ -89,8 +90,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     elevation: 3,
-    height: "80%",
-    top: "10%",
+    width: "80%", // Genişlik ayarlandı
+    left: "10%", // Ortalamak için
     backgroundColor: Palette.background,
   },
   labelContainer: { justifyContent: "center", alignItems: "center" },

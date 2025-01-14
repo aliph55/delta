@@ -50,7 +50,6 @@ const NewArrival = () => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
-            // console.log("newArr", item);
             return (
               <TouchableOpacity
                 onPress={() =>
