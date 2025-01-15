@@ -55,9 +55,8 @@ const Header = () => {
               width: 50,
               height: 50,
               borderRadius: 25,
-              backgroundColor: "red",
             }}
-            resizeMode="contain"
+            resizeMode="cover"
           />
         </TouchableOpacity>
       </View>

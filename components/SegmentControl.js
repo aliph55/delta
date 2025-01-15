@@ -76,7 +76,7 @@ const SegmentedControl = React.memo(({ selectedOption, onOptionPress }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column", // Dikey hizalama
-    width: 120, // Genişliği sabitlemek için ayarlandı
+    width: 50, // Genişliği sabitlemek için ayarlandı
     backgroundColor: Palette.baseGray05,
     marginBottom: 25,
   },

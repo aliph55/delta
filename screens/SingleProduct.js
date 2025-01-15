@@ -10,13 +10,15 @@ import React, { useState } from "react";
 import ImageHeader from "../components/Image";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SegmentControl from "../components/SegmentControl";
+import { useSelector } from "react-redux";
 
-const options = ["S", "M", "L", "XL"];
 const SingleProduct = ({ route, navigation }) => {
   const { title, image, description, id, price, rating, category } =
     route.params;
 
   const [selectedOption, setSelectedOption] = useState("L");
+
+  const userInfo = useSelector((state) => state.user);
 
   return (
     <View
@@ -61,7 +63,12 @@ const SingleProduct = ({ route, navigation }) => {
         }}
       >
         <Image
-          source={require("../assets/user.png")}
+          source={{
+            uri:
+              userInfo.isLooged === false
+                ? userInfo?.profileImage
+                : userInfo?.userData?.photo,
+          }}
           style={{
             width: 50,
             height: 50,
@@ -86,7 +93,7 @@ const SingleProduct = ({ route, navigation }) => {
           style={{
             // backgroundColor: "red",
             justifyContent: "space-around",
-            // flexDirection: "row",
+            flexDirection: "row",
             marginTop: 35,
             height: 350,
             alignItems: "center",
