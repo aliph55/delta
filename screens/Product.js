@@ -8,21 +8,20 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 
-const Product = ({ navigation }) => {
+const Product = ({ navigation, route }) => {
   const [newProducts, setProducts] = useState();
-
-  const product = "jewelery";
+  const { category } = route.params;
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: "Products: " + product,
+      headerTitle: "Products: " + category,
     });
   }, []);
 
   const getProducts = async () => {
     try {
       const response = await fetch(
-        `https://fakestoreapi.com/products/category/${product}`
+        `https://fakestoreapi.com/products/category/${category}`
       );
       const res = await response.json();
       setProducts(res);
@@ -34,8 +33,6 @@ const Product = ({ navigation }) => {
   useEffect(() => {
     getProducts();
   }, []);
-
-  console.log(newProducts);
 
   const turncateString = (str, num) => {
     if (str?.length > num) {
@@ -59,7 +56,13 @@ const Product = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("SingleProduct", {
-                    item,
+                    title: item.title,
+                    image: item.image,
+                    description: item.description,
+                    id: item.id,
+                    price: item.price,
+                    rating: item.rating,
+                    category: item.category,
                   })
                 }
                 style={{

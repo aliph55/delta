@@ -6,7 +6,7 @@ const Icon = () => {
     <View style={{ alignItems: "center" }}>
       <Image
         source={require("../assets/icon.png")}
-        style={{ width: 100, height: 100 }}
+        style={{ width: 70, height: 70 }}
       />
     </View>
   );

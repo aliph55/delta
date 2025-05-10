@@ -6,7 +6,6 @@ import {
 } from "react-native";
 import React from "react";
 import Header from "../components/Header";
-import Search from "../components/Search";
 import ImageHeader from "../components/Image";
 import NewArrival from "../components/NewArrival";
 import Categories from "../components/Categories";
@@ -16,14 +15,8 @@ const Home = () => {
   return (
     <View style={[styles.container, { width, height }]}>
       <ImageHeader />
-      <ScrollView
-        style={{
-          flex: 1,
-          // paddingBottom: 45,
-        }}
-      >
+      <ScrollView>
         <Header />
-        <Search />
         <NewArrival />
         <Categories />
       </ScrollView>

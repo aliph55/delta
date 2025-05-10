@@ -6,14 +6,19 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import ImageHeader from "../components/Image";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import SegmentControl from "../components/SegmentControl";
+import { useSelector } from "react-redux";
 
 const SingleProduct = ({ route, navigation }) => {
-  const { item } = route.params;
+  const { title, image, description, id, price, rating, category } =
+    route.params;
 
-  console.log("item ", item);
+  const [selectedOption, setSelectedOption] = useState("L");
+
+  const userInfo = useSelector((state) => state.user);
 
   return (
     <View
@@ -58,7 +63,12 @@ const SingleProduct = ({ route, navigation }) => {
         }}
       >
         <Image
-          source={require("../assets/user.png")}
+          source={{
+            uri:
+              userInfo.isLooged === false
+                ? userInfo?.profileImage
+                : userInfo?.userData?.photo,
+          }}
           style={{
             width: 50,
             height: 50,
@@ -77,34 +87,31 @@ const SingleProduct = ({ route, navigation }) => {
             textAlign: "center",
           }}
         >
-          {item.title}
+          {title}
         </Text>
         <View
           style={{
+            // backgroundColor: "red",
             justifyContent: "space-around",
             flexDirection: "row",
             marginTop: 35,
+            height: 350,
+            alignItems: "center",
           }}
         >
-          <View
-            style={{
-              borderRadius: 25,
-              backgroundColor: "white",
-              width: 50,
-            }}
-          >
-            <Text style={styles.size}>S</Text>
-            <Text style={styles.size}>M</Text>
-            <Text style={[styles.size, styles.active]}>L</Text>
-            <Text style={styles.size}>XL</Text>
-          </View>
+          {category !== "electronics" && (
+            <SegmentControl
+              selectedOption={selectedOption}
+              onOptionPress={setSelectedOption}
+            />
+          )}
           <View>
             <Image
-              source={{ uri: item?.image }}
+              source={{ uri: image }}
               style={{
                 width: 250,
                 height: 250,
-                backgroundColor: "red",
+                // backgroundColor: "red",
                 borderRadius: 15,
               }}
               resizeMode="stretch"
@@ -117,7 +124,7 @@ const SingleProduct = ({ route, navigation }) => {
           }}
         >
           <Text style={{ textAlign: "center" }}>
-            Product Code {item.category} : {item.id}
+            Product Code {category} : {id}
           </Text>
         </View>
         <View
@@ -146,12 +153,12 @@ const SingleProduct = ({ route, navigation }) => {
               style={{
                 backgroundColor: "white",
                 padding: 5,
-                width: 55,
+                width: 65,
                 textAlign: "center",
                 borderRadius: 10,
               }}
             >
-              {item.price}$
+              {price}$
             </Text>
           </View>
           <View
@@ -179,7 +186,7 @@ const SingleProduct = ({ route, navigation }) => {
                 borderRadius: 10,
               }}
             >
-              ⭐{item.rating.rate}
+              ⭐{rating?.rate}
             </Text>
           </View>
         </View>
@@ -204,13 +211,22 @@ const SingleProduct = ({ route, navigation }) => {
               </Text>
             </View>
             <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Payment", {
+                  title,
+                  image,
+                  description,
+                  id,
+                  price,
+                  rating,
+                  category,
+                })
+              }
               style={{
                 width: 50,
                 backgroundColor: "white",
                 alignSelf: "center",
                 borderRadius: 5,
-                // padding: 10,
-                // alignContent: "flex-end",
               }}
             >
               <Text
@@ -224,7 +240,7 @@ const SingleProduct = ({ route, navigation }) => {
               </Text>
             </TouchableOpacity>
           </View>
-          <Text style={{}}>{item.description}</Text>
+          <Text style={{}}>{description}</Text>
         </View>
       </ScrollView>
     </View>
@@ -238,11 +254,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: "center",
   },
-  active: {
-    backgroundColor: "#8b8b8b",
-    color: "white",
-    borderRadius: 25,
-  },
+
   price: {
     fontSize: 25,
   },
